@@ -10,9 +10,8 @@ vector< vector<int> > row;
 vector< vector<int> > col;
 vector< vector<int> > answer;
 
-
 void input(istream &input) {
-    input >> row_size >> col_size;
+    input>>row_size>>col_size;
     input.ignore(1);
 
     row.resize(row_size, vector<int>());
@@ -21,7 +20,8 @@ void input(istream &input) {
         getline(input, line);
 
         stringstream ss(line); int temp;
-        while (ss >> temp) row[ri].push_back(temp);
+        while (ss>>temp)
+        row[ri].push_back(temp);
     }
 
     col.resize(col_size, vector<int>());
@@ -29,56 +29,59 @@ void input(istream &input) {
         string line;
         getline(input, line);
 
-        stringstream ss(line); int temp;
-        while (ss >> temp) col[ci].push_back(temp);
+        stringstream ss(line);
+        int temp;
+        while (ss >> temp)
+        col[ci].push_back(temp);
     }
 
     answer.resize(row_size, vector<int>(col_size));
 }
 
-bool check_col(int ci) {
-    int run = 0, chi = 0;
-    for (int ri = 0; ri < row_size; ri++) {
-        if (answer[ri][ci] == 1) {
-            run++;
 
-            if (chi >= col[ci].size() || run > col[ci][chi])
-                return false;
-        }
+bool check_col(int ci){
+	int run=0,chi=0;
+	for(int i=0;i<row_size;i++){
+		if (answer[i][ci] == 1){
+			run++;
+			if(chi >= col[ci].size() || run > col[ci][chi])
+				return false;
+		}
+		else if (answer[i][ci] == 0)
+			return true;
+		else if (answer[i][ci] == -1 && run>0){
+			if(run != col[ci][chi])
+				return false;
+			run = 0;
+			chi ++;
+		}
+	}
 
-        else if (answer[ri][ci] == 0) return true;
-        else if (answer[ri][ci] == -1 && run > 0) {
-            if (run != col[ci][chi])
-                return false;
-            run = 0;
-            chi++;
-        }
-    }
-    if (run > 0) {
-        if (run != col[ci][chi])
-            return false;
-        chi++;
-    }
-    if (chi != col[ci].size())
-        return false;
+	if (run > 0){
+		if(run != col[ci][chi])
+			return false;
+		chi++;
+	}
+	if(chi != col[ci].size())
+		return false;
 
-    return true;
+	return true;
 }
 
 int sum(vector<int> &vi) {
-    int ret = 0;
+    int s = 0;
     for (int i = 0; i < vi.size(); i++)
-        ret += vi[i];
-    return ret;
+        s += vi[i];
+    return s;
 }
 
 
-bool solve(int ri, bool debug = false) {
+bool solve(int ri) {
 
     for (int ci = 0; ci < col_size; ci++)
         if (check_col(ci) == false)
-            return false;
-	       //做column確認
+        return false;
+	//每次做column確認
 
     if (ri == row_size)
         return true;
@@ -88,10 +91,9 @@ bool solve(int ri, bool debug = false) {
        if (row[ri][0] == col_size) {
             for (int ci = 0; ci < col_size; ci++)
                 answer[ri][ci] = 1;
-            return solve(ri + 1, debug);
+            return solve(ri + 1);
         }
-    }
-     //一行只輸入一個數字且等於col_size，此行填滿1
+    } //一行只輸入一個數字且等於col_size，此行填滿1
 
     int hints_sum = sum(row[ri]);
     if (hints_sum + row[ri].size() - 1 == col_size) {
@@ -110,9 +112,8 @@ bool solve(int ri, bool debug = false) {
             answer[ri][pos] = -1;
             pos += 1;
         }
-        return solve(ri + 1, debug);
-    }
-    //輸入數字提示加空格剛好填滿一排
+        return solve(ri + 1);
+    } //輸入數字提示加空格剛好填滿一排
 
 
     vector<int> gap(row[ri].size(), 1);
@@ -143,7 +144,7 @@ bool solve(int ri, bool debug = false) {
         	answer[ri][ci] = -1;
 
 
-        if (solve(ri + 1, debug) == true)
+        if (solve(ri + 1) == true)
             return true;
 
 
@@ -151,27 +152,28 @@ bool solve(int ri, bool debug = false) {
             answer[ri][ci] = 0;
 
 
-        int gi = gap.size() - 1;
-        gap[gi]++;
-        while (hints_sum + sum(gap) > col_size && gi > 0) {
-            gap[gi - 1]++;
-            gap[gi] = 1;
-            gi--;
+        int s = gap.size() - 1;
+        gap[s]++;
+        while (hints_sum + sum(gap) > col_size && s > 0) {
+            gap[s - 1]++;
+            gap[s] = 1;
+            s--;
         }
 
 
-    }
+    } while (hints_sum + sum(gap) <= col_size);
     //row的每個位置嘗試
-    while (hints_sum + sum(gap) <= col_size);
-
     return false;
 }
 
 
+
+
 int main() {
 
-	  input(cin);
-    solve(0, true);
+	input(cin);
+
+    solve(0);
 
 
 	for(int l=0;l<row_size;l++){
@@ -185,5 +187,7 @@ int main() {
 	}
 
 
+
+	// your code goes here
 	return 0;
 }
