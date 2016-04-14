@@ -39,30 +39,30 @@ void input(istream &input) {
 }
 
 
-bool check_col(int ci){
-	int run=0,chi=0;
+bool check(int ci){
+	int run=0,j=0;
 	for(int i=0;i<row_size;i++){
 		if (answer[i][ci] == 1){
 			run++;
-			if(chi >= col[ci].size() || run > col[ci][chi])
+			if(j >= col[ci].size() || run > col[ci][j])
 				return false;
 		}
 		else if (answer[i][ci] == 0)
 			return true;
 		else if (answer[i][ci] == -1 && run>0){
-			if(run != col[ci][chi])
+			if(run != col[ci][j])
 				return false;
 			run = 0;
-			chi ++;
+			j ++;
 		}
 	}
 
 	if (run > 0){
-		if(run != col[ci][chi])
+		if(run != col[ci][j])
 			return false;
-		chi++;
+		j++;
 	}
-	if(chi != col[ci].size())
+	if(j != col[ci].size())
 		return false;
 
 	return true;
@@ -78,8 +78,8 @@ int sum(vector<int> &vi) {
 
 bool solve(int ri) {
 
-    for (int ci = 0; ci < col_size; ci++)
-        if (check_col(ci) == false)
+    for (int i = 0; i < col_size; i++)
+        if (check(i) == false)
         return false;
 	//每次做column確認
 
@@ -89,23 +89,23 @@ bool solve(int ri) {
 
     if (row[ri].size() == 1) {
        if (row[ri][0] == col_size) {
-            for (int ci = 0; ci < col_size; ci++)
-                answer[ri][ci] = 1;
+            for (int i = 0; i < col_size; i++)
+                answer[ri][i] = 1;
             return solve(ri + 1);
         }
     } //一行只輸入一個數字且等於col_size，此行填滿1
 
-    int hints_sum = sum(row[ri]);
-    if (hints_sum + row[ri].size() - 1 == col_size) {
+    int hints = sum(row[ri]);
+    if (hints + row[ri].size() - 1 == col_size) {
 
         int pos = 0;
-        for (int rhi = 0; rhi < row[ri].size(); rhi++) {
-            for (int ci = 0; ci < row[ri][rhi]; ci++) {
+        for (int k = 0; k < row[ri].size(); k++) {
+            for (int ci = 0; ci < row[ri][k]; ci++) {
                 answer[ri][pos + ci] = 1;
             }
-            pos += row[ri][rhi];
+            pos += row[ri][k];
 
-            if (rhi == row[ri].size() - 1)
+            if (k == row[ri].size() - 1)
             	continue;
 
 
@@ -121,59 +121,59 @@ bool solve(int ri) {
     do {
         int pos = gap[0];
 
-        for (int ci = 0; ci < gap[0]; ci++)
-            answer[ri][ci] = -1;
+        for (int i = 0; i < gap[0]; i++)
+            answer[ri][i] = -1;
 
-        for (int rhi = 0; rhi < row[ri].size(); rhi++) {
-            for (int ci = 0; ci < row[ri][rhi]; ci++) {
-                answer[ri][pos + ci] = 1;
+        for (int k = 0; k < row[ri].size(); k++) {
+            for (int i = 0; i < row[ri][k]; i++) {
+                answer[ri][pos + i] = 1;
             }
-            pos += row[ri][rhi];
+            pos += row[ri][k];
 
 
-            if (rhi == row[ri].size() - 1)
+            if (k == row[ri].size() - 1)
             	continue;
 
-            for (int ci = 0; ci < gap[rhi + 1]; ci++) {
-                answer[ri][pos + ci] = -1;
+            for (int i = 0; i < gap[k + 1]; i++) {
+                answer[ri][pos + i] = -1;
             }
-            pos += gap[rhi + 1];
+            pos += gap[k + 1];
         }
 
-        for (int ci = pos; ci < col_size; ci++)
-        	answer[ri][ci] = -1;
+        for (int i = pos; i < col_size; i++)
+        	answer[ri][i] = -1;
 
 
         if (solve(ri + 1) == true)
             return true;
 
 
-        for (int ci = 0; ci < col_size; ci++)
-            answer[ri][ci] = 0;
+        for (int i = 0; i < col_size; i++)
+            answer[ri][i] = 0;
 
 
         int s = gap.size() - 1;
         gap[s]++;
-        while (hints_sum + sum(gap) > col_size && s > 0) {
-            gap[s - 1]++;
-            gap[s] = 1;
+
+        while (hints + sum(gap) > col_size && s > 0) {
+            gap[s-1]++;
+            gap[s]=1;
             s--;
         }
 
 
-    } while (hints_sum + sum(gap) <= col_size);
+    } while (hints + sum(gap) <= col_size);
     //row的每個位置嘗試
     return false;
 }
 
 
 
-
 int main() {
 
-	input(cin);
+	 input(cin);
 
-    solve(0);
+   solve(0);
 
 
 	for(int l=0;l<row_size;l++){
@@ -187,7 +187,5 @@ int main() {
 	}
 
 
-
-	// your code goes here
 	return 0;
 }
