@@ -1265,6 +1265,14 @@ prep.push_back("near");
             if(!(got == hash.end())){
               output.push_back(make_pair(got->first,got->second));
             }
+            got = hash.find (gram[1]+' '+gram[2]+' '+gram[3]+' '+gram[4]+' '+prep[i]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
+            got = hash.find (gram[1]+' '+gram[2]+' '+gram[3]+' '+prep[i]+' '+gram[4]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
           }
           got = hash.find (gram[1]+' '+gram[2]+' '+gram[3]+' '+gram[4]);
           if(!(got == hash.end())){
@@ -1603,7 +1611,7 @@ prep.push_back("near");
         }
         else if(pos[0]==1 && pos[1]==5){
           for (int i = 0; i < 20; i++) {
-            got = hash.find (gram[0]+' '+prep[i]+' '+gram[2]+' '+gram[3]+' '+gram[5]);
+            got = hash.find (gram[0]+' '+prep[i]+' '+gram[2]+' '+gram[3]+' '+gram[4]);
             if(!(got == hash.end())){
               output.push_back(make_pair(got->first,got->second));
             }
@@ -2398,11 +2406,11 @@ prep.push_back("near");
                   if(!(got == hash.end())){
                       output.push_back(make_pair(got->first,got->second));
                   }
-                  got = hash.find (gram[1]+' '+gram[3]+' '+gram[4]);
+                  got = hash.find (gram[1]+' '+gram[2]+' '+gram[4]);
                   if(!(got == hash.end())){
                       output.push_back(make_pair(got->first,got->second));
                   }
-                  got = hash.find (gram[1]+' '+gram[2]+' '+gram[4]);
+                  got = hash.find (gram[1]+' '+gram[3]+' '+gram[4]);
                   if(!(got == hash.end())){
                       output.push_back(make_pair(got->first,got->second));
                   }
@@ -2689,6 +2697,10 @@ prep.push_back("near");
             if(!(got == hash.end())){
               output.push_back(make_pair(got->first,got->second));
             }
+            got = hash.find (prep[i]+' '+gram[1]+' '+gram[2]+' '+gram[3]+' '+gram[5]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
           }
         }
         else if(pos[0]==1 && pos[1]==3 && pos[2]==4){
@@ -2727,6 +2739,24 @@ prep.push_back("near");
             output.push_back(make_pair(got->first,got->second));
           }
         }
+        else if(pos[0]==1 && pos[1]==2 && pos[2]==4){
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[4]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[1]+' '+gram[3]+' '+gram[4]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[1]+' '+gram[3]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+        }
         else if(pos[0]==0 && pos[1]==1 && pos[2]==3){
           got = hash.find (gram[0]+' '+gram[2]+' '+gram[4]+' '+gram[5]);
           if(!(got == hash.end())){
@@ -2751,17 +2781,79 @@ prep.push_back("near");
             output.push_back(make_pair(got->first,got->second));
           }
         }
+        else if(pos[0]==1 && pos[1]==4 && pos[2]==5){
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[4]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[1]+' '+gram[3]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[1]+' '+gram[3]+' '+gram[4]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+        }
         else if(pos[0]==0 && pos[1]==3 && pos[2]==5){
           for (int i = 0; i < 20; i++) {
             got = hash.find (prep[i]+' '+gram[1]+' '+gram[2]+' '+gram[4]);
             if(!(got == hash.end())){
               output.push_back(make_pair(got->first,got->second));
             }
+            got = hash.find (gram[1]+' '+gram[2]+' '+gram[4]+' '+prep[i]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
+            got = hash.find (gram[1]+' '+gram[2]+' '+prep[i]+' '+gram[4]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
+            for (int j = 0; j < 20; j++) {
+              got = hash.find (prep[j]+' '+gram[1]+' '+gram[2]+' '+gram[4]+' '+prep[i]);
+              if(!(got == hash.end())){
+                output.push_back(make_pair(got->first,got->second));
+              }
+            }
           }
         }
         else if(pos[0]==1 && pos[1]==3 && pos[2]==5){
           for (int i = 0; i < 20; i++) {
             got = hash.find (gram[0]+' '+gram[2]+' '+gram[4]+' '+prep[i]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
+          }
+        }
+        else if(pos[0]==0 && pos[1]==3 && pos[2]==5){
+          for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+              got = hash.find (prep[i]+' '+gram[1]+' '+gram[2]+' '+prep[j]+' '+gram[4]);
+              if(!(got == hash.end())){
+                output.push_back(make_pair(got->first,got->second));
+              }
+              got = hash.find (prep[j]+' '+gram[1]+' '+gram[2]+' '+gram[4]+' '+prep[i]);
+              if(!(got == hash.end())){
+                output.push_back(make_pair(got->first,got->second));
+              }
+              got = hash.find (gram[1]+' '+prep[j]+' '+gram[2]+' '+gram[4]+' '+prep[i]);
+              if(!(got == hash.end())){
+                output.push_back(make_pair(got->first,got->second));
+              }
+            }
+            got = hash.find (gram[1]+' '+gram[2]+' '+prep[i]+' '+gram[4]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
+            got = hash.find (gram[1]+' '+gram[2]+' '+gram[4]+' '+prep[i]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
+            got = hash.find (prep[i]+' '+gram[1]+' '+gram[2]+' '+gram[4]);
             if(!(got == hash.end())){
               output.push_back(make_pair(got->first,got->second));
             }
@@ -2838,6 +2930,36 @@ prep.push_back("near");
           if(!(got == hash.end())){
             output.push_back(make_pair(got->first,got->second));
           }
+        }
+        else if(pos[0]==1 && pos[1]==3 && pos[2]==6){
+          for (int i = 0; i < 20; i++) {
+            got = hash.find (gram[0]+' '+gram[2]+' '+prep[i]+' '+gram[4]+' '+gram[5]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
+          }
+        }
+        else if(pos[0]==1 && pos[1]==3 && pos[2]==4){
+            got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[5]+' '+gram[6]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
+            got = hash.find (gram[0]+' '+gram[2]+' '+gram[4]+' '+gram[5]+' '+gram[6]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
+        }
+        else if(pos[0]==0 && pos[1]==2 && pos[2]==3){
+            got = hash.find (gram[1]+' '+gram[2]+' '+gram[4]+' '+gram[5]+' '+gram[6]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
+        }
+        else if(pos[0]==1 && pos[1]==4 && pos[2]==6){
+            got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[5]+' '+gram[6]);
+            if(!(got == hash.end())){
+              output.push_back(make_pair(got->first,got->second));
+            }
         }
       }
   }//end if pos size ==3
@@ -3142,6 +3264,24 @@ prep.push_back("near");
             output.push_back(make_pair(got->first,got->second));
           }
       }
+      else if(pos[0]==1 && pos[1]==2 && pos[2]==4 && pos[3]==5){
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[1]+' '+gram[3]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[4]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[1]+' '+gram[3]+' '+gram[4]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+      }
     }
     else if(gram.size()==7){
       if(pos[0]==0 && pos[1]==1 && pos[2]==3 && pos[3]==4){
@@ -3190,6 +3330,50 @@ prep.push_back("near");
             output.push_back(make_pair(got->first,got->second));
           }
           got = hash.find (gram[0]+' '+gram[1]+' '+gram[5]+' '+gram[6]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[1]+' '+gram[4]+' '+gram[6]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+      }
+      else if(pos[0]==0 && pos[1]==1 && pos[2]==4 && pos[3]==6){
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[5]+' '+gram[6]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[1]+' '+gram[2]+' '+gram[3]+' '+gram[5]+' '+gram[6]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[1]+' '+gram[2]+' '+gram[3]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[1]+' '+gram[4]+' '+gram[6]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+      }
+      else if(pos[0]==1 && pos[1]==2 && pos[2]==4 && pos[3]==6){
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[5]+' '+gram[6]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[4]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[2]+' '+gram[3]+' '+gram[5]);
+          if(!(got == hash.end())){
+            output.push_back(make_pair(got->first,got->second));
+          }
+          got = hash.find (gram[0]+' '+gram[1]+' '+gram[3]+' '+gram[5]);
           if(!(got == hash.end())){
             output.push_back(make_pair(got->first,got->second));
           }
