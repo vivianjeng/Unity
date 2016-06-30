@@ -807,15 +807,15 @@ prep.push_back("near");
       }
       else if(pos[0]==1 && pos[1]==2){
         for (int i = 0; i < 20; i++) {
-          got = hash.find (gram[0]+' '+prep[i]+' '+gram[1]+' '+prep[2]);
+          got = hash.find (gram[0]+' '+prep[i]+' '+gram[1]+' '+gram[2]);
           if(!(got == hash.end())){
             output.push_back(make_pair(got->first,got->second));
           }
-          got = hash.find (gram[0]+' '+gram[1]+' '+prep[i]+' '+prep[2]);
+          got = hash.find (gram[0]+' '+gram[1]+' '+prep[i]+' '+gram[2]);
           if(!(got == hash.end())){
             output.push_back(make_pair(got->first,got->second));
           }
-          got = hash.find (gram[0]+' '+gram[1]+' '+prep[2]+' '+prep[i]);
+          got = hash.find (gram[0]+' '+gram[1]+' '+gram[2]+' '+prep[i]);
           if(!(got == hash.end())){
             output.push_back(make_pair(got->first,got->second));
           }
@@ -823,7 +823,7 @@ prep.push_back("near");
           if(!(got == hash.end())){
             output.push_back(make_pair(got->first,got->second));
           }
-          got = hash.find (gram[0]+' '+prep[i]+' '+prep[2]);
+          got = hash.find (gram[0]+' '+prep[i]+' '+gram[2]);
           if(!(got == hash.end())){
             output.push_back(make_pair(got->first,got->second));
           }
